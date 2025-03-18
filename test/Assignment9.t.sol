@@ -12,8 +12,8 @@ contract Assignment9Test is Test {
     }
 
     function testFactoryPattern() public {
-        assignment.createContract();
-        address deployed = assignment.deployedContracts(0);
+        assignment.createContract(12345);
+        address deployed = address(assignment.deployedContracts(0));
 
         SimpleContract simple = SimpleContract(deployed);
         simple.setValue(42);
@@ -25,6 +25,6 @@ contract Assignment9Test is Test {
     function testOnlyOwnerCanCreateContract() public {
         vm.prank(address(0x1234));
         vm.expectRevert();
-        assignment.createContract();
+        assignment.createContract(0);
     }
 }
